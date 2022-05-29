@@ -1,5 +1,6 @@
 #Solution for Question 10- A
 import collections
+import time
 
 # Referred from https://github.com/Schachte/stable-matching-algorithm
 #Super group 1 teams
@@ -13,7 +14,7 @@ rankings_Super_Group_1 = {
 #Super group 2 teams
 rankings_Super_Group_2 = {
     'D': 	['A', 'C', 'B'],
-    'E': 	['C', 'A', 'B'],
+    'E': 	['B', 'A', 'C'],
     'F':  	['A', 'B', 'C']
 
 }
@@ -50,7 +51,9 @@ def stable_matching(team):
                 team_wo_opponent.append(matched_team[0][0])
                 #old team is removed
                 team_wo_opponent.remove(team)
-                matched_team[0][0] = team
+                y = list(matched_team)
+                y[0] = team
+                matched_team = tuple(y)                
                 break
 
 def main():
@@ -65,5 +68,6 @@ def main():
             stable_matching(team)
     print('Stable match output::::: \n')
     print(match)
+start_time = time.time()    
 main()
-
+print("Execution time: %s seconds" % (time.time() - start_time))
